@@ -1,0 +1,20 @@
+{
+    "name": "zeleznypa/nette-button-macros",
+	"description": "Add support of pair latte macro \"button\" for render form control SubmitButton as <button>. It can be useful for Twitter bootstrap design.",
+	"version": "1.0.0",
+	"type": "library",	
+	"keywords": ["nette","latte"],
+	"license": "WTFPL",
+	"authors": [
+        {
+            "name": "Pavel Železný",
+            "email": "info@pavelzelezny.cz",
+            "homepage": "http://pavelzelezny.cz",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "nette/nette": ">= 2.0.7"
+    }
+}
