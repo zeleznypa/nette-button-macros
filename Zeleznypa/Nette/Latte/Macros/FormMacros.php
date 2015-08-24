@@ -2,36 +2,39 @@
 
 namespace Zeleznypa\Nette\Latte\Macros;
 
-use Nette\Latte;
+use Latte\CompileException;
+use Latte\Compiler;
+use Latte\MacroNode;
+use Latte\Macros\MacroSet;
+use Latte\PhpWriter;
 
 /**
  * Some new nette form latte macros
  * @author Pavel Železný <info@pavelzelezny.cz>
  */
-class FormMacros extends \Nette\Latte\Macros\MacroSet
+class FormMacros extends MacroSet
 {
 
 	/**
 	 * Register latte macros
 	 * @author Pavel Železný <info@pavelzelezny.cz>
-	 * @return void
+	 * @param Compiler $compiler
 	 */
-	public static function install(Latte\Compiler $compiler)
+	public static function install(Compiler $compiler)
 	{
-		parent::install($compiler);
 		$me = new static($compiler);
 		$me->addMacro('button', array($me, 'macroButton'), array($me, 'macroButtonEnd'));
 		$me->addMacro('caption', array($me, 'macroCaption'));
 	}
 
 	/**
-	 * Renders button beggining tag
+	 * Renders button beginning tag
 	 * @author Pavel Železný <info@pavelzelezny.cz>
-	 * @param \Nette\Latte\MacroNode $node
-	 * @param \Nette\Latte\PhpWriter $writer
+	 * @param MacroNode $node
+	 * @param PhpWriter $writer
 	 * @return void
 	 */
-	public function macroButton(\Nette\Latte\MacroNode $node, \Nette\Latte\PhpWriter $writer)
+	public function macroButton(MacroNode $node, PhpWriter $writer)
 	{
 		$code = '$_input = (is_object(%node.word) ? %node.word : $_form[%node.word]);';
 		$code .= '$_attributes[$_input->getName()] = %node.array;';
@@ -47,11 +50,11 @@ class FormMacros extends \Nette\Latte\Macros\MacroSet
 	/**
 	 * Renders button end tag
 	 * @author Pavel Železný <info@pavelzelezny.cz>
-	 * @param \Nette\Latte\MacroNode $node
-	 * @param \Nette\Latte\PhpWriter $writer
+	 * @param MacroNode $node
+	 * @param PhpWriter $writer
 	 * @return void
 	 */
-	public function macroButtonEnd(\Nette\Latte\MacroNode $node, \Nette\Latte\PhpWriter $writer)
+	public function macroButtonEnd(MacroNode $node, PhpWriter $writer)
 	{
 		$code = 'echo $_buttonControl->endTag();';
 		$code .= 'unset($_buttonControl);';
@@ -65,11 +68,11 @@ class FormMacros extends \Nette\Latte\Macros\MacroSet
 	/**
 	 * Render button caption
 	 * @author Pavel Železný <info@pavelzelezny.cz>
-	 * @param \Nette\Latte\MacroNode $node
-	 * @param \Nette\Latte\PhpWriter $writer
+	 * @param MacroNode $node
+	 * @param PhpWriter $writer
 	 * @return void
 	 */
-	public function macroCaption(\Nette\Latte\MacroNode $node, \Nette\Latte\PhpWriter $writer)
+	public function macroCaption(MacroNode $node, PhpWriter $writer)
 	{
 		if ($node->args !== '')
 		{

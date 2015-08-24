@@ -23,12 +23,9 @@ Prefered way to intall is by [Composer](http://getcomposer.org)
 
 Add following code into neon.conf
 
-	common:
-		factories:
-			nette.latte:
-				class:  \Nette\Latte\Engine
-				setup:
-					- \Zeleznypa\Nette\Latte\Macros\FormMacros::install(::$service->getCompiler())
+	latte:
+		macros:
+			- \Zeleznypa\Nette\Latte\Macros\FormMacros::install
 
 
 ## Usage ##
